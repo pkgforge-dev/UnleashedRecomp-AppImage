@@ -23,8 +23,9 @@ jobs:
       run: |
         chmod +x ./*-appimage.sh && ./*-appimage.sh
         mkdir dist
+        ls -la
         mv *.AppImage* dist/
-        mv *.AppImage* dist/
+        mv *.AppBundle* dist/
 
     - name: Check version file
       run: |
