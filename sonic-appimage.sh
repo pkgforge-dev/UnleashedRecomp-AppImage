@@ -7,8 +7,6 @@ ICON="https://raw.githubusercontent.com/hedge-dev/UnleashedRecompResources/e5a4a
 
 export ARCH="$(uname -m)"
 export APPIMAGE_EXTRACT_AND_RUN=1
-export VERSION=$(pacman -Q "$PACKAGE" | awk 'NR==1 {print $2; exit}')
-echo "$VERSION" > ~/version
 
 UPINFO="gh-releases-zsync|$(echo "$GITHUB_REPOSITORY" | tr '/' '|')|latest|*$ARCH.AppImage.zsync"
 LIB4BN="https://raw.githubusercontent.com/VHSgunzo/sharun/refs/heads/main/lib4bin"
@@ -16,6 +14,7 @@ URUNTIME="https://github.com/VHSgunzo/uruntime/releases/latest/download/uruntime
 BINARY=$(wget "https://api.github.com/repos/Jujstme/UnleashedRecomp/releases" -O - \
 	| sed 's/[()",{} ]/\n/g' | grep -oi "https.*unleashed.*.zip$" | head -1)
 VERSION=$(echo "$BINARY" | awk -F'/' '{print $(NF-1)}')
+echo "$VERSION" > ~/version
 
 # Prepare AppDir
 mkdir -p ./AppDir/shared/bin
@@ -42,7 +41,7 @@ mv -v ./UnleashedRecomp ./shared/bin
 # ADD LIBRARIES
 wget "$LIB4BN" -O ./lib4bin
 chmod +x ./lib4bin
-xvfb-run -d -- ./lib4bin -p -v -e -s -k \
+xvfb-run -a -- ./lib4bin -p -v -e -s -k \
 	./shared/bin/UnleashedRecomp \
 	/usr/lib/libvulkan* \
 	/usr/lib/libwayland* \
@@ -65,7 +64,6 @@ chmod +x ./uruntime
 
 #Add udpate info to runtime
 echo "Adding update information \"$UPINFO\" to runtime..."
-sleep 1
 ./uruntime --appimage-addupdinfo "$UPINFO"
 
 echo "Generating AppImage..."
