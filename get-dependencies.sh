@@ -29,6 +29,7 @@ pacman -Syu --noconfirm \
 	pulseaudio \
 	pulseaudio-alsa \
 	strace \
+	unzip \
 	wayland \
 	wget \
 	xorg-server-xvfb \
