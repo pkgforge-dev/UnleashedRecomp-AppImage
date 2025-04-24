@@ -30,10 +30,21 @@ pacman -Syu --noconfirm \
 	pulseaudio-alsa \
 	strace \
 	unzip \
+	vulkan-headers \
+	vulkan-mesa-layers \
+	vulkan-nouveau \
+	vulkan-radeon \
 	wayland \
 	wget \
 	xorg-server-xvfb \
 	zsync
+
+if [ "$(uname -m)" = 'x86_64' ]; then
+	pacman -Syu --noconfirm vulkan-intel
+else
+	pacman -Syu --noconfirm \
+		vulkan-freedreno vulkan-panfrost vulkan-broadcom
+fi
 
 echo "Installing debloated pckages..."
 echo "---------------------------------------------------------------"
@@ -48,4 +59,3 @@ rm -f ./*.pkg.tar.zst
 
 echo "All done!"
 echo "---------------------------------------------------------------"
-
