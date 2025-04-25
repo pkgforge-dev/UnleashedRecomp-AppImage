@@ -73,8 +73,4 @@ echo "Generating [dwfs]AppBundle...(Go runtime)"
 	--compression "-C zstd:level=22 -S26 -B8" \
 	--output-to "${PACKAGE}-${VERSION}-anylinux-${ARCH}.dwfs.AppBundle"
 
-echo "Generating zsync file..."
-zsyncmake *.AppImage -u *.AppImage
-zsyncmake *.AppBundle -u *.AppBundle
-
 echo "All Done!"
