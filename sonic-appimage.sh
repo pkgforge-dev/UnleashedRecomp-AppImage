@@ -10,7 +10,7 @@ export APPIMAGE_EXTRACT_AND_RUN=1
 
 UPINFO="gh-releases-zsync|$(echo "$GITHUB_REPOSITORY" | tr '/' '|')|latest|*$ARCH.AppImage.zsync"
 LIB4BN="https://raw.githubusercontent.com/VHSgunzo/sharun/refs/heads/main/lib4bin"
-URUNTIME="https://github.com/VHSgunzo/uruntime/releases/latest/download/uruntime-appimage-dwarfs-$ARCH"
+APPIMAGETOOL="https://github.com/pkgforge-dev/appimagetool-uruntime/releases/download/continuous/appimagetool-$ARCH.AppImage"
 BINARY=$(wget "https://api.github.com/repos/Jujstme/UnleashedRecomp/releases" -O - \
 	| sed 's/[()",{} ]/\n/g' | grep -oi "https.*unleashed.*.zip$" | head -1)
 VERSION=$(echo "$BINARY" | awk -F'/' '{print $(NF-1)}')
@@ -60,20 +60,11 @@ ln ./sharun ./AppRun
 
 # MAKE APPIMAGE WITH URUNTIME
 cd ..
-wget "$URUNTIME" -O ./uruntime
-chmod +x ./uruntime
-
-#Add udpate info to runtime
-echo "Adding update information \"$UPINFO\" to runtime..."
-./uruntime --appimage-addupdinfo "$UPINFO"
+wget "$APPIMAGETOOL" -O ./appimagetool
+chmod +x ./appimagetool
 
 echo "Generating AppImage..."
-./uruntime --appimage-mkdwarfs -f \
-	--set-owner 0 --set-group 0 \
-	--no-history --no-create-timestamp \
-	--compression zstd:level=22 -S26 -B8 \
-	--header uruntime \
-	-i ./AppDir -o "$PACKAGE"-"$VERSION"-anylinux-"$ARCH".AppImage
+./appimagetool -n -u "$UPINFO" "$PWD"/AppDir "$PWD"/"$PACKAGE"-"$VERSION"-anylinux-"$ARCH".AppImage
 
 wget -O ./pelf "https://github.com/xplshn/pelf/releases/latest/download/pelf_$(uname -m)" && chmod +x ./pelf
 echo "Generating [dwfs]AppBundle...(Go runtime)"
