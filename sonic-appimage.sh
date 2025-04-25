@@ -43,6 +43,7 @@ wget "$LIB4BN" -O ./lib4bin
 chmod +x ./lib4bin
 xvfb-run -a -- ./lib4bin -p -v -e -s -k \
 	./shared/bin/UnleashedRecomp \
+	/usr/lib/gconv/* \
 	/usr/lib/libvulkan* \
 	/usr/lib/libwayland* \
 	/usr/lib/gtk-3*/*/* \
