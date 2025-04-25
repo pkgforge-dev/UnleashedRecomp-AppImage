@@ -24,6 +24,7 @@ pacman -Syu --noconfirm \
 	desktop-file-utils \
 	git \
 	gtk3 \
+	libxss \
 	patchelf \
 	pipewire-audio \
 	pulseaudio \
