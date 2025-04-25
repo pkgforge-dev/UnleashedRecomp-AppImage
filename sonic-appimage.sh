@@ -4,6 +4,7 @@ set -eux
 
 PACKAGE=UnleashedRecomp
 ICON="https://raw.githubusercontent.com/hedge-dev/UnleashedRecompResources/e5a4adccb30734321ac17347090abeb6690dab70/images/game_icon.png"
+REPO="https://github.com/Jujstme/UnleashedRecomp.git"
 
 export ARCH="$(uname -m)"
 export APPIMAGE_EXTRACT_AND_RUN=1
@@ -11,10 +12,6 @@ export APPIMAGE_EXTRACT_AND_RUN=1
 UPINFO="gh-releases-zsync|$(echo "$GITHUB_REPOSITORY" | tr '/' '|')|latest|*$ARCH.AppImage.zsync"
 LIB4BN="https://raw.githubusercontent.com/VHSgunzo/sharun/refs/heads/main/lib4bin"
 URUNTIME="https://github.com/VHSgunzo/uruntime/releases/latest/download/uruntime-appimage-dwarfs-$ARCH"
-BINARY=$(wget "https://api.github.com/repos/Jujstme/UnleashedRecomp/releases" -O - \
-	| sed 's/[()",{} ]/\n/g' | grep -oi "https.*unleashed.*.zip$" | head -1)
-VERSION=$(echo "$BINARY" | awk -F'/' '{print $(NF-1)}')
-echo "$VERSION" > ~/version
 
 # Prepare AppDir
 mkdir -p ./AppDir/shared/bin
@@ -33,10 +30,12 @@ Comment=Static recompilation of Sonic Unleashed
 MimeType=x-scheme-handler/unleashedrecomp
 StartupWMClass=UnleashedRecomp' > ./unleashedrecomp.desktop
 
-wget "$BINARY" -O ./bin.zip
-unzip ./bin.zip
-rm -f ./bin.zip
-mv -v ./UnleashedRecomp ./shared/bin
+# BUILD THE THING
+git clone --recurse-submodules "$REPO" ./sonic && (
+	cd ./sonic
+	cmake . --preset linux-release -DSDL2MIXER_VORBIS=VORBISFILE
+	cmake --build ./out/build/linux-release --target UnleashedRecomp
+)
 
 # ADD LIBRARIES
 wget "$LIB4BN" -O ./lib4bin
