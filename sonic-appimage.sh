@@ -21,7 +21,7 @@ mkdir -p ./AppDir/shared/bin
 cd ./AppDir
 
 wget "$ICON" -O ./unleashedrecomp.png
-ln -s ./unleashedrecomp.png ./.DirIcon
+ln -s unleashedrecomp.png ./.DirIcon
 
 echo '[Desktop Entry]
 Name=Unleashed Recompiled
