@@ -25,7 +25,7 @@ ln -s unleashedrecomp.png ./.DirIcon
 
 echo '[Desktop Entry]
 Name=Unleashed Recompiled
-Exec=UnleashedRecomp
+Exec=UnleashedRecomp --sdl-video-driver wayland
 Type=Application
 Icon=unleashedrecomp
 Categories=Game;
