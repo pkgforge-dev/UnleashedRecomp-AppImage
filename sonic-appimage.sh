@@ -77,4 +77,6 @@ echo "Generating [dwfs]AppBundle..."
 	--compression "-C zstd:level=22 -S26 -B8" \
 	--output-to "$PACKAGE-$VERSION-anylinux-$ARCH.dwfs.AppBundle"
 
+zsyncmake ./*.AppBundle -u ./*.AppBundle
+
 echo "All Done!"
