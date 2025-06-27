@@ -66,11 +66,14 @@ chmod +x ./appimagetool
 echo "Generating AppImage..."
 ./appimagetool -n -u "$UPINFO" "$PWD"/AppDir "$PWD"/"$PACKAGE"-"$VERSION"-anylinux-"$ARCH".AppImage
 
-wget -O ./pelf "https://github.com/xplshn/pelf/releases/latest/download/pelf_$(uname -m)" && chmod +x ./pelf
-echo "Generating [dwfs]AppBundle...(Go runtime)"
+wget -O ./pelf "https://github.com/xplshn/pelf/releases/latest/download/pelf_$(uname -m)" 
+chmod +x ./pelf
+echo "Generating [dwfs]AppBundle..."
 ./pelf --add-appdir ./AppDir \
-	--appbundle-id="${PACKAGE}-${VERSION}" \
+	--appimage-compat \
+	--add-updinfo "$UPINFO" \
+	--appbundle-id="$PACKAGE#github.com/$GITHUB_REPOSITORY:$VERSION@$(date +%d_%m_%Y)" \
 	--compression "-C zstd:level=22 -S26 -B8" \
-	--output-to "${PACKAGE}-${VERSION}-anylinux-${ARCH}.dwfs.AppBundle"
+	--output-to "$PACKAGE-$VERSION-anylinux-$ARCH.dwfs.AppBundle"
 
 echo "All Done!"
