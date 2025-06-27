@@ -66,6 +66,7 @@ chmod +x ./appimagetool
 echo "Generating AppImage..."
 ./appimagetool -n -u "$UPINFO" "$PWD"/AppDir "$PWD"/"$PACKAGE"-"$VERSION"-anylinux-"$ARCH".AppImage
 
+UPINFO="$(echo "$UPINFO" | sed 's#.AppImage.zsync#*.AppBundle.zsync#g')"
 wget -O ./pelf "https://github.com/xplshn/pelf/releases/latest/download/pelf_$(uname -m)" 
 chmod +x ./pelf
 echo "Generating [dwfs]AppBundle..."
