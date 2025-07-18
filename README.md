@@ -1,4 +1,7 @@
-# UnleashedRecomp AppImage
+# UnleashedRecomp-AppImage 🐧
+
+[![GitHub Downloads](https://img.shields.io/github/downloads/pkgforge-dev/UnleashedRecomp-AppImage/total?logo=github&label=GitHub%20Downloads)](https://github.com/pkgforge-dev/UnleashedRecomp-AppImage/releases/latest)
+[![CI Build Status](https://github.com//pkgforge-dev/UnleashedRecomp-AppImage/actions/workflows/blank.yml/badge.svg)](https://github.com/pkgforge-dev/UnleashedRecomp-AppImage/releases/latest)
 
 # ⚠️ WARNING ⚠️
 
@@ -6,7 +9,9 @@ This repo uses the same binary used for the [AUR package](https://aur.archlinux.
 
 If you wish to still use this, it is strongly suggested that you sandbox this with [aisap](https://github.com/mgord9518/aisap)
 
--------------------------------------------------------------------------------------------------------------
+* [Latest Stable Release](https://github.com/pkgforge-dev/UnleashedRecomp-AppImage/releases/latest)
+
+---
 
 **This AppImage bundles everything and should work on any linux distro, even on musl based ones.** 
 
@@ -29,3 +34,7 @@ This appimage works without fuse2 as it can use fuse3 instead, it can also work 
     <img src="https://github.com/user-attachments/assets/d40067a6-37d2-4784-927c-2c7f7cc6104b" alt="Inspiration Image">
   </a>
 </details>
+
+---
+
+More at: [AnyLinux-AppImages](https://pkgforge-dev.github.io/Anylinux-AppImages/) 
