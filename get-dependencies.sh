@@ -1,62 +1,30 @@
 #!/bin/sh
 
-set -ex
+set -eux
 
-sed -i 's/DownloadUser/#DownloadUser/g' /etc/pacman.conf
-
-if [ "$(uname -m)" = 'x86_64' ]; then
-	PKG_TYPE='x86_64.pkg.tar.zst'
-else
-	PKG_TYPE='aarch64.pkg.tar.xz'
-fi
-
-LLVM_URL="https://github.com/pkgforge-dev/llvm-libs-debloated/releases/download/continuous/llvm-libs-nano-$PKG_TYPE"
-LIBXML_URL="https://github.com/pkgforge-dev/llvm-libs-debloated/releases/download/continuous/libxml2-iculess-$PKG_TYPE"
-OPUS_URL="https://github.com/pkgforge-dev/llvm-libs-debloated/releases/download/continuous/opus-nano-$PKG_TYPE"
-FFMPEG_URL="https://github.com/pkgforge-dev/llvm-libs-debloated/releases/download/continuous/ffmpeg-mini-$PKG_TYPE"
-
+ARCH="$(uname -m)"
+EXTRA_PACKAGES="https://raw.githubusercontent.com/pkgforge-dev/Anylinux-AppImages/refs/heads/main/useful-tools/get-debloated-pkgs.sh"
 
 echo "Installing build dependencies..."
 echo "---------------------------------------------------------------"
 pacman -Syu --noconfirm \
-	base-devel \
-	curl \
-	desktop-file-utils \
-	git \
-	gtk3 \
-	libxss \
-	patchelf \
-	pipewire-audio \
-	pulseaudio \
-	pulseaudio-alsa \
-	strace \
-	unzip \
-	vulkan-headers \
+	base-devel         \
+	curl               \
+	git                \
+	libxss             \
+	pipewire-audio     \
+	pulseaudio         \
+	pulseaudio-alsa    \
+	unzip              \
+	vulkan-headers     \
 	vulkan-mesa-layers \
-	vulkan-nouveau \
-	vulkan-radeon \
-	wayland \
-	wget \
-	xorg-server-xvfb \
+	wayland            \
+	wget               \
+	xorg-server-xvfb   \
 	zsync
 
-if [ "$(uname -m)" = 'x86_64' ]; then
-	pacman -Syu --noconfirm vulkan-intel
-else
-	pacman -Syu --noconfirm \
-		vulkan-freedreno vulkan-panfrost vulkan-broadcom
-fi
-
-echo "Installing debloated pckages..."
+echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
-wget --retry-connrefused --tries=30 "$LLVM_URL"    -O  ./llvm.pkg.tar.zst
-wget --retry-connrefused --tries=30 "$LIBXML_URL"  -O  ./libxml2.pkg.tar.zst
-wget --retry-connrefused --tries=30 "$OPUS_URL"    -O  ./opus.pkg.tar.zst
-wget --retry-connrefused --tries=30 "$FFMPEG_URL"  -O  ./ffmpeg.pkg.tar.zst
-
-pacman -U --noconfirm ./*.pkg.tar.zst
-rm -f ./*.pkg.tar.zst
-
-
-echo "All done!"
-echo "---------------------------------------------------------------"
+wget --retry-connrefused --tries=30 "$EXTRA_PACKAGES" -O ./get-debloated-pkgs.sh
+chmod +x ./get-debloated-pkgs.sh
+./get-debloated-pkgs.sh --add-vulkan libxml2-mini gtk3-mini ffmpeg-mini opus-mini
