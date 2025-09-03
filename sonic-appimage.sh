@@ -17,7 +17,7 @@ export DEPLOY_VULKAN=1
 # ADD LIBRARIES
 wget --retry-connrefused --tries=30 "$SHARUN" -O ./quick-sharun
 chmod +x ./quick-sharun
-./quick-sharun /usr/bin/UnleashedRecomp /usr/lib/libpulse.so*
+./quick-sharun /usr/bin/UnleashedRecomp /usr/lib/pulseaudio/*
 
 # MAKE APPIMAGE WITH URUNTIME
 wget --retry-connrefused --tries=30 "$URUNTIME" -O ./uruntime2appimage
