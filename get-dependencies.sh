@@ -34,3 +34,5 @@ git clone https://aur.archlinux.org/unleashedrecomp-bin.git ./unleashedrecomp
 cd ./unleashedrecomp
 makepkg -fs --noconfirm
 pacman --noconfirm -U ./*.pkg.tar.*
+
+pacman -Q unleashedrecomp-bin | awk '{print $2; exit}' > ~/version
