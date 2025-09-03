@@ -5,9 +5,9 @@
 
 # ⚠️ WARNING ⚠️
 
-This repo uses the same binary used for the [AUR package](https://aur.archlinux.org/packages/unleashedrecomp-bin), **unfortunately because compilation needs binaries from the xbox360 which cannot be distributed, there is no transparency on how the binary was built at all**
+This repo uses the [AUR package](https://aur.archlinux.org/packages/unleashedrecomp-bin) to get the unleashedrecomp binary, **unfortunately because compilation needs binaries from the xbox360 which cannot be distributed, there is no transparency on how the binary was built at all**
 
-If you wish to still use this, it is strongly suggested that you sandbox this with [aisap](https://github.com/mgord9518/aisap)
+If you wish to still use this, it is strongly suggested that you sandbox this with [sas](https://github.com/Samueru-sama/simple-appimage-sandbox)
 
 * [Latest Stable Release](https://github.com/pkgforge-dev/UnleashedRecomp-AppImage/releases/latest)
 
@@ -21,7 +21,7 @@ AppImage made using [sharun](https://github.com/VHSgunzo/sharun), which makes it
 
 It is possible that this appimage may fail to work with appimagelauncher, I recommend these alternatives instead: 
 
-* [AM](https://github.com/ivan-hc/AM) `am -ias unleashedrecomp` or `appman -ias unleashedrecomp` **it gets sandboxed with aisap**
+* [AM](https://github.com/ivan-hc/AM) `am -ias unleashedrecomp` or `appman -ias unleashedrecomp` **it gets sandboxed with sas**
 
 * [dbin](https://github.com/xplshn/dbin) `dbin install unleashedrecomp.appimage`
 
