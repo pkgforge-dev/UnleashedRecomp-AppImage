@@ -34,7 +34,7 @@ echo "Generating [dwfs]AppBundle..."
 	--add-updinfo "$UPINFO" \
 	--appbundle-id="UnleashedRecomp#github.com/$GITHUB_REPOSITORY:$VERSION@$(date +%d_%m_%Y)" \
 	--compression "-C zstd:level=22 -S26 -B8" \
-	--output-to ./UnleashedRecomp-"$VERSION"-anylinux-"$ARCH".AppImage
+	--output-to ./UnleashedRecomp-"$VERSION"-anylinux-"$ARCH".dwfs.AppBundle
 zsyncmake ./*.AppBundle -u ./*.AppBundle
 
 mkdir -p ./dist
