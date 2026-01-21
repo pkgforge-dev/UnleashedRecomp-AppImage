@@ -11,6 +11,8 @@ export UPINFO="gh-releases-zsync|${GITHUB_REPOSITORY%/*}|${GITHUB_REPOSITORY#*/}
 export ICON=/usr/share/icons/hicolor/128x128/apps/io.github.hedge_dev.unleashedrecomp.png
 export DESKTOP=/usr/share/applications/io.github.hedge_dev.unleashedrecomp.desktop
 export DEPLOY_PIPEWIRE=1
+export DEPLOY_OPENGL=1
+export DEPLOY_VULKAN=1
 
 # Deploy dependencies
 quick-sharun /usr/bin/UnleashedRecomp
