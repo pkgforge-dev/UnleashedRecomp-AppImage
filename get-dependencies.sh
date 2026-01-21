@@ -1,38 +1,18 @@
 #!/bin/sh
 
-set -eux
+set -eu
 
-ARCH="$(uname -m)"
-EXTRA_PACKAGES="https://raw.githubusercontent.com/pkgforge-dev/Anylinux-AppImages/refs/heads/main/useful-tools/get-debloated-pkgs.sh"
+ARCH=$(uname -m)
 
-echo "Installing build dependencies..."
+echo "Installing package dependencies..."
 echo "---------------------------------------------------------------"
-pacman -Syu --noconfirm \
-	base-devel         \
-	curl               \
-	git                \
-	libxss             \
-	pipewire-audio     \
-	pulseaudio         \
-	pulseaudio-alsa    \
-	unzip              \
-	vulkan-headers     \
-	vulkan-mesa-layers \
-	wayland            \
-	wget               \
-	xorg-server-xvfb   \
-	zsync
+pacman -Syu --noconfirm pipewire-audio pipewire-jack
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
-wget --retry-connrefused --tries=30 "$EXTRA_PACKAGES" -O ./get-debloated-pkgs.sh
-chmod +x ./get-debloated-pkgs.sh
-./get-debloated-pkgs.sh --add-common ffmpeg-mini
+get-debloated-pkgs --add-common ffmpeg-mini
 
-sed -i 's|EUID == 0|EUID == 69|g' /usr/bin/makepkg
-git clone https://aur.archlinux.org/unleashedrecomp-bin.git ./unleashedrecomp
-cd ./unleashedrecomp
-makepkg -fs --noconfirm
-pacman --noconfirm -U ./*.pkg.tar.*
+# Comment this out if you need an AUR package
+make-aur-package unleashedrecomp-bin
 
-pacman -Q unleashedrecomp-bin | awk '{print $2; exit}' > ~/version
+# If the application needs to be manually built that has to be done down here
