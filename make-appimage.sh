@@ -10,6 +10,7 @@ export ADD_HOOKS="self-updater.bg.hook"
 export UPINFO="gh-releases-zsync|${GITHUB_REPOSITORY%/*}|${GITHUB_REPOSITORY#*/}|latest|*$ARCH.AppImage.zsync"
 export ICON=/usr/share/icons/hicolor/128x128/apps/io.github.hedge_dev.unleashedrecomp.png
 export DESKTOP=/usr/share/applications/io.github.hedge_dev.unleashedrecomp.desktop
+export DEPLOY_PIPEWIRE=1
 
 # Deploy dependencies
 quick-sharun /usr/bin/UnleashedRecomp
