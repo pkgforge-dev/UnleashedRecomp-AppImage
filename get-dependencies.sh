@@ -38,7 +38,7 @@ flatpak-extract ./*.flatpak
 mkdir -p ./AppDir/bin
 mv -v ./*-flatpak/files/bin/UnleashedRecomp                    ./AppDir/bin
 mv -v ./*-flatpak/files/share/applications/*.desktop           ./AppDir
-mv -v ./*-flatpak/files/share/icons/hicolor/128x128/apps/*.png ./AppDir
+cp -v ./*-flatpak/files/share/icons/hicolor/128x128/apps/*.png ./AppDir
 mv -v ./*-flatpak/files/share/icons/hicolor/128x128/apps/*.png ./.DirIcon
 
 awk -F'/' '/Location:/{print $(NF-1); exit}' /tmp/download.log > ~/version
