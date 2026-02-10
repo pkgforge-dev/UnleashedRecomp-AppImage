@@ -21,4 +21,8 @@ quick-sharun --make-appimage
 
 # Test the app for 12 seconds, if the app normally quits before that time
 # then skip this or check if some flag can be passed that makes it stay open
+
+# in this case since there is no gpu available we have to install vulkan-swrast
+pacman -S --noconfirm vulkan-swrast
+
 quick-sharun --test ./dist/*.AppImage
