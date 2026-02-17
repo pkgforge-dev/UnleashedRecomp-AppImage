@@ -16,12 +16,12 @@ quick-sharun ./AppDir/bin/*
 
 # The flatpak build hardcodes /var/data as the game location
 # which is a read only by default and useless for us
-sed -i -e 's|/var/data|/tmp/.Ur|g' ./AppDir/shared/bin/UnleashedRecomp
+sed -i -e 's|/var/data|/tmp/._Ur|g' ./AppDir/shared/bin/UnleashedRecomp
 
 echo '#!/bin/false
 datadir=${XDG_DATA_HOME:-$HOME/.local/share}/UnleashedRecomp-AppImage
 mkdir -p "$datadir"
-ln -sfn "$datadir" /tmp/.Ur' > ./AppDir/bin/fix-flatpak-path.src.hook
+ln -sfn "$datadir" /tmp/._Ur' > ./AppDir/bin/fix-flatpak-path.src.hook
 
 # Turn AppDir into AppImage
 quick-sharun --make-appimage
