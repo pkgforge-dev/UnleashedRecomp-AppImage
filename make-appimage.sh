@@ -19,7 +19,7 @@ quick-sharun ./AppDir/bin/*
 sed -i -e 's|/var/data|/tmp/._Ur|g' ./AppDir/shared/bin/UnleashedRecomp
 
 echo '#!/bin/false
-datadir=${XDG_DATA_HOME:-$HOME/.local/share}/UnleashedRecomp-AppImage
+datadir=${XDG_DATA_HOME:-$HOME/.local/share}/UnleashedRecomp
 mkdir -p "$datadir"
 ln -sfn "$datadir" /tmp/._Ur' > ./AppDir/bin/fix-flatpak-path.src.hook
 
